@@ -3,6 +3,7 @@
 #include "map.h"
 
 #define STARTING_SIZE 4
+#define RESIZE_FACTOR 2
 #define MAX_LOAD 1.7
 
 int simple_string_hash(void *string);
@@ -17,11 +18,30 @@ void *create_map(int (*hash)(void*), int (*compare)(void*,void*)){
     main->hash = hash;
     main->capacity = STARTING_SIZE;
     main->pairs = 0;
-    main->map = calloc(sizeof(Bucket*),STARTING_SIZE);
-    if (!main->map){
+    main->arr = calloc(STARTING_SIZE, sizeof(Bucket*));
+    if (!main->arr){
         return NULL;
     }
     return main;
+}
+
+int add_pair(void *key, void *value, void *map){
+    Map *local_map = (Map *)map;
+    if(MAX_LOAD < ((local_map->pairs + 1.0)/local_map->capacity)){
+        local_map->capacity = local_map->capacity * RESIZE_FACTOR;
+        void *new_arr = calloc(local_map->capacity, sizeof(Bucket*));
+        for(int i = 0; i < local_map->capacity/2;i++){
+            Bucket *curr = local_map->arr[i];
+            while(curr){
+                int new_location = local_map->hash(curr->key);
+                
+            }
+
+        }
+
+    }else{
+
+    }
 }
 
 

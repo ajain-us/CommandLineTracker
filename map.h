@@ -9,7 +9,7 @@ typedef struct bucket{
 } Bucket;
 
 typedef struct map{
-    Bucket *arr;
+    Bucket **arr;
     int (*hash)(void*);
     int (*compare)(void*,void*);
     int pairs, capacity;
