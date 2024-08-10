@@ -9,7 +9,7 @@ typedef struct bucket{
 } Bucket;
 
 typedef struct map{
-    void *map;
+    Bucket *arr;
     int (*hash)(void*);
     int (*compare)(void*,void*);
     int pairs, capacity;
@@ -24,6 +24,8 @@ int remove_pair(void *key, void *map);
 void *get_value(void *key, void *map);
 
 int delete_map(void *map);
+
+void *get_key_set(void *map);
 
 
 #endif
